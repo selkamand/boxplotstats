@@ -1,0 +1,17 @@
+Package: boxplotstats
+Title: Calculate and Visualize Boxplot Summary Statistics
+Version: 0.0.0.9000
+Authors@R: 
+    person("Sam", "El-Kamand", , "selkamand@ccia.org.au", role = c("aut", "cre"),
+           comment = c(ORCID = "https://orcid.org/0000-0003-2270-8088"))
+Description: Functions to calculate and visualize boxplot summary statistics for numeric data. This includes calculating the minimum, maximum, median, first quartile (Q1), third quartile (Q3), interquartile range (IQR), and identifying outliers. It supports both single vectors and grouped data, and provides utilities for exporting results to TSV files and generating plots using `ggplot2`.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Suggests: 
+    ggplot2,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    stats

@@ -1,0 +1,82 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# boxplotstats
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/selkamand/boxplotstats/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/selkamand/boxplotstats/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
+The `boxplotstats` package provides functions to calculate and visualize boxplot summary statistics for numeric data, including handling grouped data.
+
+The most common use-case for this package is  you have lots of data e.g. from. bootstrapping experiments that you don't want to store, but you may want to plot.
+
+
+## Installation
+
+You can install the development version of boxplotstats from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("selkamand/boxplotstats")
+```
+
+## Usage
+
+### Calculate Boxplot Summary Statistics
+To calculate boxplot summary statistics for a single numeric vector:
+
+```{r example}
+library(boxplotstats)
+
+# Example numeric vector
+vec <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100)
+
+# Calculate boxplot statistics
+boxplot_stats <- calculate_boxplot_stats(vec)
+
+# Print the results
+print(boxplot_stats)
+```
+
+For a more complex example with outliers:
+
+
+```{r cars}
+# Numeric vector with outliers
+vec_with_outliers <- c(rep(1, times = 3), 1:10, 22, 23)
+
+# Calculate boxplot statistics
+boxplot_stats_with_outliers <- calculate_boxplot_stats(vec_with_outliers)
+
+# Print the results
+print(boxplot_stats_with_outliers)
+```
+
+### Calculate Boxplot Summary Statistics for Multiple Groups
+
+To calculate boxplot summary statistics for multiple groups:
+
+```{r}
+# Example values and group IDs
+values <- c(1, 1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 22, 23, 8, 8, 8, 12, 13, 14, 15, 30, 31)
+ids <- c("b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2")
+
+# Calculate boxplot statistics for multiple groups
+group_stats <- calculate_boxplot_stats_for_multiple_groups(values, ids)
+
+# Print the results
+print(group_stats)
+```
