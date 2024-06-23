@@ -4,12 +4,19 @@
 \alias{calculate_boxplot_stats_for_multiple_groups}
 \title{Calculate Boxplot Summary Statistics for Multiple Groups}
 \usage{
-calculate_boxplot_stats_for_multiple_groups(values, ids)
+calculate_boxplot_stats_for_multiple_groups(
+  values,
+  ids,
+  outliers_as_strings = FALSE
+)
 }
 \arguments{
 \item{values}{A numeric vector for which to calculate boxplot summary statistics.}
 
 \item{ids}{A vector of IDs corresponding to the groups in 'values'.}
+
+\item{outliers_as_strings}{Logical. Return outliers as a character vector of comma-separated strings,
+rather than as a list-column (ignored if \code{return_dataframe = FALSE})}
 }
 \value{
 A dataframe containing boxplot summary statistics for each group.

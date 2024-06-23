@@ -4,7 +4,12 @@
 \alias{calculate_boxplot_stats}
 \title{Calculate Boxplot Summary Statistics for a Numeric Vector}
 \usage{
-calculate_boxplot_stats(numeric_vector, id = NULL, return_dataframe = TRUE)
+calculate_boxplot_stats(
+  numeric_vector,
+  id = NULL,
+  return_dataframe = TRUE,
+  outliers_as_strings = FALSE
+)
 }
 \arguments{
 \item{numeric_vector}{A numeric vector for which to calculate boxplot summary statistics.}
@@ -12,6 +17,9 @@ calculate_boxplot_stats(numeric_vector, id = NULL, return_dataframe = TRUE)
 \item{id}{An optional string to add as an ID column to the dataframe}
 
 \item{return_dataframe}{Logical, if TRUE, returns a dataframe; otherwise returns a list.}
+
+\item{outliers_as_strings}{Logical. Return outliers as a character vector of comma-separated strings,
+rather than as a list-column (ignored if \code{return_dataframe = FALSE})}
 }
 \value{
 A list or dataframe containing the following elements:

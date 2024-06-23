@@ -1,3 +1,5 @@
+globalVariables(c(".data"))
+
 #' Calculate Boxplot Summary Statistics for a Numeric Vector
 #'
 #' This function calculates the summary statistics typically used in a boxplot,
@@ -7,6 +9,8 @@
 #' @param numeric_vector A numeric vector for which to calculate boxplot summary statistics.
 #' @param id An optional string to add as an ID column to the dataframe
 #' @param return_dataframe Logical, if TRUE, returns a dataframe; otherwise returns a list.
+#' @param outliers_as_strings Logical. Return outliers as a character vector of comma-separated strings,
+#' rather than as a list-column (ignored if \code{return_dataframe = FALSE})
 #' @return A list or dataframe containing the following elements:
 #' \describe{
 #'   \item{min}{The minimum value of the vector.}
@@ -29,12 +33,12 @@
 #' # More complex version with actual outliers
 #' calculate_boxplot_stats(c(rep(1, times =3), 1:10, 22, 23))
 #'
-calculate_boxplot_stats <- function(numeric_vector, id = NULL, return_dataframe = TRUE){
+calculate_boxplot_stats <- function(numeric_vector, id = NULL, return_dataframe = TRUE, outliers_as_strings = FALSE){
   # Initialize an empty list to store summary statistics
   boxplot_stats <- list()
   boxplot_stats$min <- min(numeric_vector, na.rm = TRUE)
   boxplot_stats$max <- max(numeric_vector, na.rm = TRUE)
-  boxplot_stats$median <- median(numeric_vector, na.rm = TRUE)
+  boxplot_stats$median <- stats::median(numeric_vector, na.rm = TRUE)
   boxplot_stats$q1 <- stats::quantile(numeric_vector, probs = 0.25, na.rm = TRUE)
   boxplot_stats$q3 <- stats::quantile(numeric_vector, probs = 0.75, na.rm = TRUE)
   boxplot_stats$iqr <- boxplot_stats$q3 - boxplot_stats$q1
@@ -60,6 +64,11 @@ calculate_boxplot_stats <- function(numeric_vector, id = NULL, return_dataframe 
     if(!is.null(id))
       boxplot_stats_df$id <- id
 
+    # Convert Outlier List-Column to comma-separated strings
+    if(outliers_as_strings){
+      boxplot_stats_df$outliers <- list_column_to_delim(boxplot_stats_df$outliers)
+    }
+
     return(boxplot_stats_df)
   }
   return(boxplot_stats)
@@ -72,6 +81,7 @@ calculate_boxplot_stats <- function(numeric_vector, id = NULL, return_dataframe 
 #'
 #' @param values A numeric vector for which to calculate boxplot summary statistics.
 #' @param ids A vector of IDs corresponding to the groups in 'values'.
+#' @inheritParams calculate_boxplot_stats
 #' @return A dataframe containing boxplot summary statistics for each group.
 #' @export
 #'
@@ -83,7 +93,7 @@ calculate_boxplot_stats <- function(numeric_vector, id = NULL, return_dataframe 
 #'  "b2", "b2", "b2")
 #'
 #' calculate_boxplot_stats_for_multiple_groups(values, ids)
-calculate_boxplot_stats_for_multiple_groups <- function(values, ids){
+calculate_boxplot_stats_for_multiple_groups <- function(values, ids, outliers_as_strings = FALSE){
 
   # Split the values by the ids
   grouped_values <- split(values, ids)
@@ -101,6 +111,11 @@ calculate_boxplot_stats_for_multiple_groups <- function(values, ids){
   # Combine the resulting dataframes into one
   result_df <- do.call(rbind, boxplot_stats_list)
   rownames(result_df) <- NULL
+
+  # Convert Outlier List-Column to comma-separated strings
+  if(outliers_as_strings){
+    result_df$outliers <- list_column_to_delim(result_df$outliers)
+  }
 
   return(result_df)
 }
@@ -122,7 +137,10 @@ list_column_to_delim <- function(list_column){
 #' @param df A dataframe containing boxplot statistics.
 #' @param file The file path where the TSV file will be written.
 write_boxplot_stats_tsv <- function(df, file){
-  df$outliers <- list_column_to_delim(df$outliers)
+
+  if ("list" %in% typeof(df$outliers))
+    df$outliers <- list_column_to_delim(df$outliers)
+
   utils::write.table(df, file = file, sep = "\t", col.names = TRUE, row.names = FALSE)
 }
 
