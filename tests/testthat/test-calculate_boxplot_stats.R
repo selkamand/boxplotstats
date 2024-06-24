@@ -90,7 +90,6 @@ test_that("list_column_to_delim converts list column correctly", {
 
 # Unit tests for write_boxplot_stats_tsv
 test_that("write_boxplot_stats_tsv writes data to TSV file", {
-  browser()
   tmp_file <- tempfile(fileext = ".tsv")
   write_boxplot_stats_tsv(expected_multiple_groups, tmp_file)
   written_data <- read.table(tmp_file, sep = "\t", header = TRUE, stringsAsFactors = FALSE)
