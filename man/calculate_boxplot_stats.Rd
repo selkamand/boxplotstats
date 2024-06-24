@@ -8,7 +8,8 @@ calculate_boxplot_stats(
   numeric_vector,
   id = NULL,
   return_dataframe = TRUE,
-  outliers_as_strings = FALSE
+  outliers_as_strings = FALSE,
+  delim = "|"
 )
 }
 \arguments{
@@ -18,8 +19,10 @@ calculate_boxplot_stats(
 
 \item{return_dataframe}{Logical, if TRUE, returns a dataframe; otherwise returns a list.}
 
-\item{outliers_as_strings}{Logical. Return outliers as a character vector of comma-separated strings,
-rather than as a list-column (ignored if \code{return_dataframe = FALSE})}
+\item{outliers_as_strings}{Logical. Return outliers as a character vector of '|' delimited strings rather than as a list-column (ignored if \code{return_dataframe = FALSE}).
+Can customise the delimiter using the \code{delim} argument}
+
+\item{delim}{the character used as a delimiter to separate the outlier values (defaults to '|')}
 }
 \value{
 A list or dataframe containing the following elements:

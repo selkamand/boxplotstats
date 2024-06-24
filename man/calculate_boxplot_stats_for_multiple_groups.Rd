@@ -7,7 +7,8 @@
 calculate_boxplot_stats_for_multiple_groups(
   values,
   ids,
-  outliers_as_strings = FALSE
+  outliers_as_strings = FALSE,
+  delim = "|"
 )
 }
 \arguments{
@@ -15,8 +16,10 @@ calculate_boxplot_stats_for_multiple_groups(
 
 \item{ids}{A vector of IDs corresponding to the groups in 'values'.}
 
-\item{outliers_as_strings}{Logical. Return outliers as a character vector of comma-separated strings,
-rather than as a list-column (ignored if \code{return_dataframe = FALSE})}
+\item{outliers_as_strings}{Logical. Return outliers as a character vector of '|' delimited strings rather than as a list-column (ignored if \code{return_dataframe = FALSE}).
+Can customise the delimiter using the \code{delim} argument}
+
+\item{delim}{the character used as a delimiter to separate the outlier values (defaults to '|')}
 }
 \value{
 A dataframe containing boxplot summary statistics for each group.

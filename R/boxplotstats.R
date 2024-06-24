@@ -9,8 +9,10 @@ globalVariables(c(".data"))
 #' @param numeric_vector A numeric vector for which to calculate boxplot summary statistics.
 #' @param id An optional string to add as an ID column to the dataframe
 #' @param return_dataframe Logical, if TRUE, returns a dataframe; otherwise returns a list.
-#' @param outliers_as_strings Logical. Return outliers as a character vector of comma-separated strings,
-#' rather than as a list-column (ignored if \code{return_dataframe = FALSE})
+#' @param outliers_as_strings Logical. Return outliers as a character vector of '|' delimited strings rather than as a list-column (ignored if \code{return_dataframe = FALSE}).
+#' Can customise the delimiter using the \code{delim} argument
+#' @inheritParams list_column_to_delim
+#'
 #' @return A list or dataframe containing the following elements:
 #' \describe{
 #'   \item{min}{The minimum value of the vector.}
@@ -33,7 +35,7 @@ globalVariables(c(".data"))
 #' # More complex version with actual outliers
 #' calculate_boxplot_stats(c(rep(1, times =3), 1:10, 22, 23))
 #'
-calculate_boxplot_stats <- function(numeric_vector, id = NULL, return_dataframe = TRUE, outliers_as_strings = FALSE){
+calculate_boxplot_stats <- function(numeric_vector, id = NULL, return_dataframe = TRUE, outliers_as_strings = FALSE, delim="|"){
   # Initialize an empty list to store summary statistics
   boxplot_stats <- list()
   boxplot_stats$min <- min(numeric_vector, na.rm = TRUE)
@@ -66,7 +68,7 @@ calculate_boxplot_stats <- function(numeric_vector, id = NULL, return_dataframe 
 
     # Convert Outlier List-Column to comma-separated strings
     if(outliers_as_strings){
-      boxplot_stats_df$outliers <- list_column_to_delim(boxplot_stats_df$outliers)
+      boxplot_stats_df$outliers <- list_column_to_delim(boxplot_stats_df$outliers, delim = delim)
     }
 
     return(boxplot_stats_df)
@@ -93,7 +95,7 @@ calculate_boxplot_stats <- function(numeric_vector, id = NULL, return_dataframe 
 #'  "b2", "b2", "b2")
 #'
 #' calculate_boxplot_stats_for_multiple_groups(values, ids)
-calculate_boxplot_stats_for_multiple_groups <- function(values, ids, outliers_as_strings = FALSE){
+calculate_boxplot_stats_for_multiple_groups <- function(values, ids, outliers_as_strings = FALSE, delim="|"){
 
   # Split the values by the ids
   grouped_values <- split(values, ids)
@@ -114,7 +116,7 @@ calculate_boxplot_stats_for_multiple_groups <- function(values, ids, outliers_as
 
   # Convert Outlier List-Column to comma-separated strings
   if(outliers_as_strings){
-    result_df$outliers <- list_column_to_delim(result_df$outliers)
+    result_df$outliers <- list_column_to_delim(result_df$outliers, delim=delim)
   }
 
   return(result_df)
@@ -125,9 +127,10 @@ calculate_boxplot_stats_for_multiple_groups <- function(values, ids, outliers_as
 #' This function converts list columns in a dataframe to delimited strings.
 #'
 #' @param list_column A list column to convert.
+#' @param delim the character used as a delimiter to separate the outlier values (defaults to '|')
 #' @return A character vector with delimited strings.
-list_column_to_delim <- function(list_column){
-  unlist(lapply(list_column, function(x) {paste0(x, collapse = ",")}))
+list_column_to_delim <- function(list_column, delim="|"){
+  unlist(lapply(list_column, function(x) {paste0(x, collapse = delim)}))
 }
 
 #' Write Boxplot Statistics to TSV File

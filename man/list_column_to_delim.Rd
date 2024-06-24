@@ -4,10 +4,12 @@
 \alias{list_column_to_delim}
 \title{Convert List Column to Delimited String}
 \usage{
-list_column_to_delim(list_column)
+list_column_to_delim(list_column, delim = "|")
 }
 \arguments{
 \item{list_column}{A list column to convert.}
+
+\item{delim}{the character used as a delimiter to separate the outlier values (defaults to '|')}
 }
 \value{
 A character vector with delimited strings.
