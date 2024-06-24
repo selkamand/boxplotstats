@@ -85,18 +85,19 @@ test_that("calculate_boxplot_stats_for_multiple_groups works correctly", {
 test_that("list_column_to_delim converts list column correctly", {
   df <- data.frame(outliers = I(list(c(100, 101), c(102, 103))))
   result <- list_column_to_delim(df$outliers)
-  expect_equal(result, c("100,101", "102,103"))
+  expect_equal(result, c("100|101", "102|103"))
 })
 
 # Unit tests for write_boxplot_stats_tsv
 test_that("write_boxplot_stats_tsv writes data to TSV file", {
+  browser()
   tmp_file <- tempfile(fileext = ".tsv")
   write_boxplot_stats_tsv(expected_multiple_groups, tmp_file)
   written_data <- read.table(tmp_file, sep = "\t", header = TRUE, stringsAsFactors = FALSE)
   expect_equal(nrow(written_data), nrow(expected_multiple_groups))
   expect_equal(colnames(written_data), colnames(expected_multiple_groups))
 
-  written_outliers <- lapply(strsplit(written_data$outliers, split = ","), as.numeric)
+  written_outliers <- lapply(strsplit(written_data$outliers, split = "\\|"), as.numeric)
   expect_equal(written_outliers, unclass(expected_multiple_groups$outliers))
 })
 

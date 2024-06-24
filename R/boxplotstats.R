@@ -66,7 +66,7 @@ calculate_boxplot_stats <- function(numeric_vector, id = NULL, return_dataframe 
     if(!is.null(id))
       boxplot_stats_df$id <- id
 
-    # Convert Outlier List-Column to comma-separated strings
+    # Convert Outlier List-Column to pipe-separated strings
     if(outliers_as_strings){
       boxplot_stats_df$outliers <- list_column_to_delim(boxplot_stats_df$outliers, delim = delim)
     }
@@ -114,7 +114,7 @@ calculate_boxplot_stats_for_multiple_groups <- function(values, ids, outliers_as
   result_df <- do.call(rbind, boxplot_stats_list)
   rownames(result_df) <- NULL
 
-  # Convert Outlier List-Column to comma-separated strings
+  # Convert Outlier List-Column to pipe-separated strings
   if(outliers_as_strings){
     result_df$outliers <- list_column_to_delim(result_df$outliers, delim=delim)
   }
