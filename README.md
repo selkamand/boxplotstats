@@ -87,3 +87,20 @@ print(group_stats)
 #> 1   22, 23 b1
 #> 2   30, 31 b2
 ```
+
+### Visualise Boxplots
+
+``` r
+# Plot a single boxplot
+plot_boxplot_stats(boxplot_stats_with_outliers)
+```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+
+``` r
+
+# Plot multiple boxplots
+plot_boxplot_stats(group_stats, ylab = "Identifiers")
+```
+
+<img src="man/figures/README-unnamed-chunk-3-2.png" width="100%" />
