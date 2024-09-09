@@ -267,7 +267,6 @@ plot_boxplot_stats <- function(stats, xlab = "Value", ylab = "ID", delim = "|",
   show_ids = TRUE
   if (!"id" %in% names(stats)) {
     stats$id <- paste0("id: ", seq_len(nrow(stats)))
-
     if(nrow(stats) > 1){
       message("plot_boxplot_stats: No 'id' column found. Adding numbered IDs based on row order.\n",
               "We strongly suggest adding an 'id' column to the stats dataframe.")
@@ -275,8 +274,6 @@ plot_boxplot_stats <- function(stats, xlab = "Value", ylab = "ID", delim = "|",
     else{
       show_ids = FALSE
     }
-
-
   }
 
   # Validate that required columns are present
@@ -336,7 +333,7 @@ plot_boxplot_stats <- function(stats, xlab = "Value", ylab = "ID", delim = "|",
       data = df_outliers,
       ggplot2::aes(
         y = .data[["id"]],
-        x = .data[["outliers"]],
+        x = .data[["values"]],
         fill = colval(.data, col_fill),
         colour = colval(.data, col_colour)
       ),
