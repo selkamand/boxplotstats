@@ -4,13 +4,70 @@
 \alias{plot_boxplot_stats}
 \title{Plot Boxplot Statistics}
 \usage{
-plot_boxplot_stats(stats, xlab = "ID", ylab = "Value")
+plot_boxplot_stats(
+  stats,
+  xlab = "Value",
+  ylab = "ID",
+  delim = "|",
+  sort = TRUE,
+  descending = TRUE,
+  col_fill = NULL,
+  col_colour = NULL,
+  col_tooltip = NULL,
+  col_data_id = NULL,
+  col_onclick = NULL,
+  show_legend = TRUE,
+  dotsize = 1,
+  dotstroke = 1,
+  dotshape = 1,
+  linewidth = 0.5
+)
 }
 \arguments{
-\item{stats}{A dataframe containing boxplot statistics.}
+\item{stats}{A dataframe containing boxplot statistics with required columns: 'outlier_low_threshold',
+'outlier_high_threshold', 'median', 'q1', 'q3', and 'outliers'.}
 
-\item{xlab, ylab}{axis title}
+\item{xlab}{A character string specifying the x-axis label. Default is "Value".}
+
+\item{ylab}{A character string specifying the y-axis label. Default is "ID".}
+
+\item{delim}{The delimiter used in the 'outliers' column for splitting string-based outliers into numeric values.
+Default is "|".}
+
+\item{sort}{Logical, whether to sort boxplots by the 'median' column. Default is TRUE.}
+
+\item{descending}{Logical, if sorting, whether to sort in descending order. Default is TRUE.}
+
+\item{col_fill}{Optional column name for determining the fill color of the boxplot.}
+
+\item{col_colour}{Optional column name for determining the outline color of the boxplot.}
+
+\item{col_tooltip}{Optional column name for custom tooltips in the interactive plot. Default is a generated tooltip.}
+
+\item{col_data_id}{Optional column name for the \code{data_id} used in interactivity.}
+
+\item{col_onclick}{Optional column name for specifying the \code{onclick} actions in the interactive plot.}
+
+\item{show_legend}{Logical, whether to show the legend for color and fill. Default is TRUE.}
+
+\item{dotsize}{Size of outlier points. Default is 1.}
+
+\item{dotstroke}{Stroke width of outlier points. Default is 1.}
+
+\item{dotshape}{Shape of outlier points. Default is 1.}
+
+\item{linewidth}{Width of the boxplot outlines. Default is 0.5.}
+}
+\value{
+A \code{ggplot} object with interactive boxplots.
 }
 \description{
-This function creates a boxplot using ggplot2 based on the boxplot statistics dataframe.
+This function creates an interactive boxplot using \code{ggplot2} and \code{ggiraph}, based on a dataframe
+that contains boxplot statistics. The user can specify additional options for aesthetics, sorting,
+and interactivity.
+}
+\examples{
+# Example usage:
+# df_stats <- some_dataframe_with_stats
+# plot_boxplot_stats(df_stats, xlab = "X Label", ylab = "Y Label")
 }

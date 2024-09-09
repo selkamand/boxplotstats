@@ -2,4 +2,6 @@
 
 export(calculate_boxplot_stats)
 export(calculate_boxplot_stats_for_multiple_groups)
+export(make_interactive)
+export(plot_boxplot_stats)
 export(unnest)

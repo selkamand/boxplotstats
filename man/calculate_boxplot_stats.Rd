@@ -22,7 +22,7 @@ calculate_boxplot_stats(
 \item{outliers_as_strings}{Logical. Return outliers as a character vector of '|' delimited strings rather than as a list-column (ignored if \code{return_dataframe = FALSE}).
 Can customise the delimiter using the \code{delim} argument}
 
-\item{delim}{the character used as a delimiter to separate the outlier values (defaults to '|')}
+\item{delim}{the delimiter separating different outliers. Used when outlier column is a character vector where each element describes a set of outliers delimited by some character, usually '|'.}
 }
 \value{
 A list or dataframe containing the following elements:
@@ -35,7 +35,7 @@ A list or dataframe containing the following elements:
 \item{iqr}{The interquartile range, calculated as \code{q3 - q1}.}
 \item{outlier_low_threshold}{The lower threshold for outliers, calculated as \code{q1 - 1.5 * iqr}.}
 \item{outlier_high_threshold}{The upper threshold for outliers, calculated as \code{q3 + 1.5 * iqr}.}
-\item{outliers}{A numeric vector of outlier values that are either below the lower threshold or above the upper threshold.}
+\item{outliers}{A list-column of outlier values that are either below the lower threshold or above the upper threshold. Can also be a '|' delimited character vector of outliers}
 \item{id}{An optional ID if provided.}
 }
 }

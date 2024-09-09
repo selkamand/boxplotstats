@@ -80,3 +80,18 @@ group_stats <- calculate_boxplot_stats_for_multiple_groups(values, ids)
 # Print the results
 print(group_stats)
 ```
+
+
+
+### Visualise Boxplots
+
+```{r}
+# Plot a single boxplot
+plot_boxplot_stats(boxplot_stats_with_outliers)
+
+# Plot multiple boxplots
+plot_boxplot_stats(group_stats, ylab = "Identifiers")
+plot_boxplot_stats(exemplar_atypical_boxplot_stats())
+
+```
+
