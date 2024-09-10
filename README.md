@@ -6,6 +6,13 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/selkamand/boxplotstats/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/selkamand/boxplotstats/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/selkamand/boxplotstats/branch/main/graph/badge.svg)](https://app.codecov.io/gh/selkamand/boxplotstats?branch=main)
+![GitHub Issues or Pull
+Requests](https://img.shields.io/github/issues-closed/selkamand/boxplotstats)
+[![CodeSize](https://img.shields.io/github/languages/code-size/selkamand/boxplotstats.svg)](https://github.com/selkamand/boxplotstats)
+![GitHub last
+commit](https://img.shields.io/github/last-commit/selkamand/boxplotstats)
 <!-- badges: end -->
 
 The `boxplotstats` package provides functions to calculate and visualize
