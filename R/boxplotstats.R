@@ -292,6 +292,9 @@ plot_boxplot_stats <- function(stats, xlab = "Value", ylab = "ID", delim = "|",
   # Unnest the 'outliers' for plotting points
   df_outliers <- unnest(stats$id, stats$outliers)
 
+  # Add back in the columns from stats data.frame so we can colour outlier points by any custom columns
+  df_outliers <- merge(x = df_outliers, y = dropcols(stats, c("outliers", "values")), by = "id", all.x = TRUE)
+
   # Optionally sort the 'id' based on the 'median' column
   if (sort) {
     stats$id <- stats::reorder(stats$id, stats[["median"]], decreasing = !descending)
@@ -368,6 +371,9 @@ colval <- function(df, colname) {
   else return(df[[colname]])
 }
 
+dropcols <- function(df, cols){
+  df[setdiff(colnames(df),cols)]
+}
 
 #' Make boxplots interactive
 #'
