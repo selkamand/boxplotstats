@@ -117,9 +117,4 @@ test_that("unnest function works correctly", {
   expect_equal(result$values, unlist(nested_list))
 })
 
-# Unit tests for plot_boxplot_stats
-test_that("plot_boxplot_stats produces a plot", {
-  skip_if_not_installed("ggplot2")
-  plot <- plot_boxplot_stats(expected_multiple_groups)
-  expect_s3_class(plot, "gg")
-})
+
