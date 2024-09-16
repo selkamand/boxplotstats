@@ -246,6 +246,7 @@ unnest <- function(ids, nested_list) {
 #' @param dotshape Shape of outlier points. Default is 1.
 #' @param linewidth Width of the boxplot outlines. Default is 0.5.
 #' @param width Width of the boxplots (value between 0 and 1).
+#' @inheritParams ggplot2::geom_boxplot
 #' @return A `ggplot` object with interactive boxplots.
 #' @export
 #' @examples
@@ -259,6 +260,7 @@ plot_boxplot_stats <- function(stats, xlab = "Value", ylab = "ID", delim = "|",
                                col_onclick = NULL, show_legend = TRUE,
                                dotsize = 1, dotstroke = 1, dotshape = 1,
                                width = 0.6,
+                               staplewidth = 0.8,
                                linewidth = 0.5) {
 
   # Ensure required packages are loaded
@@ -331,6 +333,7 @@ plot_boxplot_stats <- function(stats, xlab = "Value", ylab = "ID", delim = "|",
       ),
       linewidth = linewidth,
       width = width,
+      staplewidth = staplewidth,
       stat = "identity",
       show.legend = show_legend
     ) +
