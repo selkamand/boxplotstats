@@ -293,6 +293,20 @@ plot_boxplot_stats <- function(stats, xlab = "Value", ylab = "ID", delim = "|",
     stats$outliers <- delim_to_list_column(char_vector = stats$outliers, delim = delim)
   }
 
+  # If no tooltip column is provided, generate a default tooltip
+  if (is.null(col_tooltip)) {
+    r <- function(x){ round(x, digits = 3)} # Round to 3 digits
+    stats$default_tooltip <- with(stats,
+                                  paste0('<strong>', id, '</strong> <br/>',
+                                         'min: ', r(min), '<br/>',
+                                         'q1: ', r(q1), '<br/>',
+                                         'median: ', r(median), '<br/>',
+                                         'q3: ', r(q3), '<br/>',
+                                         'max: ', r(max), '<br/>'
+                                         ))
+    col_tooltip <- "default_tooltip"
+  }
+
   # Unnest the 'outliers' for plotting points
   df_outliers <- unnest(stats$id, stats$outliers)
 
@@ -304,16 +318,6 @@ plot_boxplot_stats <- function(stats, xlab = "Value", ylab = "ID", delim = "|",
     stats$id <- stats::reorder(stats$id, stats[["median"]], decreasing = !descending)
   }
 
-  # If no tooltip column is provided, generate a default tooltip
-  if (is.null(col_tooltip)) {
-    stats$default_tooltip <- with(stats,
-                                  paste0('<strong>', id, '</strong> <br/>',
-                                         'q1: ', q1, '<br/>',
-                                         'median: ', median, '<br/>',
-                                         'q3: ', q3, '<br/>',
-                                         'median: ', median, '<br/>'))
-    col_tooltip <- "default_tooltip"
-  }
 
   # Create the ggplot2 object with interactive boxplots using ggiraph
   gg <- ggplot2::ggplot(stats) +
@@ -338,11 +342,14 @@ plot_boxplot_stats <- function(stats, xlab = "Value", ylab = "ID", delim = "|",
       show.legend = show_legend
     ) +
     ggplot2::labs(fill = col_fill, colour = col_colour) +
-    ggplot2::geom_point(
+    ggiraph::geom_point_interactive(
       data = df_outliers,
       ggplot2::aes(
         y = .data[["id"]],
         x = .data[["values"]],
+        onclick = colval(.data, col_onclick),
+        data_id = colval(.data, col_data_id),
+        tooltip = colval(.data, col_tooltip),
         fill = colval(.data, col_fill),
         colour = colval(.data, col_colour)
       ),

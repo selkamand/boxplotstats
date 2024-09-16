@@ -1,5 +1,6 @@
 ---
 output: github_document
+always_allow_html: true
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -97,5 +98,14 @@ plot_boxplot_stats(boxplot_stats_with_outliers)
 
 # Plot multiple boxplots
 plot_boxplot_stats(group_stats, ylab = "Identifiers")
+```
+
+### Render interactive boxplots
+
+Add a tooltip to your plot with `make_interactive()`
+
+```{r fig.height=3, fig.width=6}
+plot <- plot_boxplot_stats(group_stats, ylab = "Identifiers")
+make_interactive(plot)
 ```
 
