@@ -91,7 +91,7 @@ print(group_stats)
 
 ### Visualise Boxplots
 
-```{r, fig.height=3, fig.width=6}
+```{r, fig.height=3, fig.width=6, dpi=300, fig.retina=2}
 # Plot a single boxplot
 plot_boxplot_stats(boxplot_stats_with_outliers)
 
