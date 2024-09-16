@@ -60,7 +60,7 @@ print(boxplot_stats)
 For a more complex example with outliers:
 
 
-```{r cars}
+```{r }
 # Numeric vector with outliers
 vec_with_outliers <- c(rep(1, times = 3), 1:10, 22, 23)
 
@@ -91,7 +91,7 @@ print(group_stats)
 
 ### Visualise Boxplots
 
-```{r}
+```{r, fig.height=3, fig.width=6}
 # Plot a single boxplot
 plot_boxplot_stats(boxplot_stats_with_outliers)
 

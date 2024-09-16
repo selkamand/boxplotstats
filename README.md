@@ -102,7 +102,7 @@ print(group_stats)
 plot_boxplot_stats(boxplot_stats_with_outliers)
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
 ``` r
 
@@ -110,4 +110,4 @@ plot_boxplot_stats(boxplot_stats_with_outliers)
 plot_boxplot_stats(group_stats, ylab = "Identifiers")
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-2.png" width="100%" />
