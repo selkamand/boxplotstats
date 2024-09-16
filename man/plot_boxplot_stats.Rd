@@ -21,6 +21,7 @@ plot_boxplot_stats(
   dotstroke = 1,
   dotshape = 1,
   width = 0.6,
+  staplewidth = 0.8,
   linewidth = 0.5
 )
 }
@@ -58,6 +59,9 @@ Default is "|".}
 \item{dotshape}{Shape of outlier points. Default is 1.}
 
 \item{width}{Width of the boxplots (value between 0 and 1).}
+
+\item{staplewidth}{The relative width of staples to the width of the box.
+Staples mark the ends of the whiskers with a line.}
 
 \item{linewidth}{Width of the boxplot outlines. Default is 0.5.}
 }
