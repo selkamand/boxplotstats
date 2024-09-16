@@ -13,15 +13,16 @@ Requests](https://img.shields.io/github/issues-closed/selkamand/boxplotstats)
 [![CodeSize](https://img.shields.io/github/languages/code-size/selkamand/boxplotstats.svg)](https://github.com/selkamand/boxplotstats)
 ![GitHub last
 commit](https://img.shields.io/github/last-commit/selkamand/boxplotstats)
+
 <!-- badges: end -->
 
 The `boxplotstats` package provides functions to calculate and visualize
 boxplot summary statistics for numeric data, including handling grouped
 data.
 
-The most common use-case for this package is you have lots of data
-e.g. from. bootstrapping experiments that you don’t want to store, but
-you may want to plot.
+The most common use-case for this package is you have lots of data e.g.
+from. bootstrapping experiments that you don’t want to store, but you
+may want to plot.
 
 ## Installation
 
@@ -111,3 +112,9 @@ plot_boxplot_stats(group_stats, ylab = "Identifiers")
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-2.png" width="100%" />
+
+### Render interactive boxplots
+
+Add a tooltip to your plot with `make_interactive()`
+
+![](man/figures/interactive_boxplot.png)

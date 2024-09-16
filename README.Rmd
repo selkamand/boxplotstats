@@ -1,5 +1,8 @@
 ---
 output: github_document
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -16,23 +19,30 @@ knitr::opts_chunk$set(
 # boxplotstats
 
 <!-- badges: start -->
+
 [![R-CMD-check](https://github.com/selkamand/boxplotstats/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/selkamand/boxplotstats/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/selkamand/boxplotstats/branch/main/graph/badge.svg)](https://app.codecov.io/gh/selkamand/boxplotstats?branch=main)
+[![Codecov test
+coverage](https://codecov.io/gh/selkamand/boxplotstats/branch/main/graph/badge.svg)](https://app.codecov.io/gh/selkamand/boxplotstats?branch=main)
 ![GitHub Issues or Pull
 Requests](https://img.shields.io/github/issues-closed/selkamand/boxplotstats)
 [![CodeSize](https://img.shields.io/github/languages/code-size/selkamand/boxplotstats.svg)](https://github.com/selkamand/boxplotstats)
 ![GitHub last
 commit](https://img.shields.io/github/last-commit/selkamand/boxplotstats)
+
 <!-- badges: end -->
 
-The `boxplotstats` package provides functions to calculate and visualize boxplot summary statistics for numeric data, including handling grouped data.
+The `boxplotstats` package provides functions to calculate and visualize
+boxplot summary statistics for numeric data, including handling grouped
+data.
 
-The most common use-case for this package is  you have lots of data e.g. from. bootstrapping experiments that you don't want to store, but you may want to plot.
-
+The most common use-case for this package is you have lots of data e.g.
+from. bootstrapping experiments that you don't want to store, but you
+may want to plot.
 
 ## Installation
 
-You can install the development version of boxplotstats from [GitHub](https://github.com/) with:
+You can install the development version of boxplotstats from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -42,6 +52,7 @@ devtools::install_github("selkamand/boxplotstats")
 ## Usage
 
 ### Calculate Boxplot Summary Statistics
+
 To calculate boxplot summary statistics for a single numeric vector:
 
 ```{r example}
@@ -58,7 +69,6 @@ print(boxplot_stats)
 ```
 
 For a more complex example with outliers:
-
 
 ```{r }
 # Numeric vector with outliers
@@ -87,8 +97,6 @@ group_stats <- calculate_boxplot_stats_for_multiple_groups(values, ids)
 print(group_stats)
 ```
 
-
-
 ### Visualise Boxplots
 
 ```{r, fig.height=3, fig.width=6, dpi=300, fig.retina=2}
@@ -99,3 +107,14 @@ plot_boxplot_stats(boxplot_stats_with_outliers)
 plot_boxplot_stats(group_stats, ylab = "Identifiers")
 ```
 
+### Render interactive boxplots
+
+Add a tooltip to your plot with `make_interactive()`
+
+```{r eval=FALSE, include=FALSE}
+plot <- plot_boxplot_stats(group_stats, ylab = "Identifiers")
+make_interactive(plot)
+```
+
+
+![](man/figures/interactive_boxplot.png)
