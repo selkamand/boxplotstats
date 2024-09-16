@@ -20,6 +20,7 @@ plot_boxplot_stats(
   dotsize = 1,
   dotstroke = 1,
   dotshape = 1,
+  width = 0.6,
   linewidth = 0.5
 )
 }
@@ -55,6 +56,8 @@ Default is "|".}
 \item{dotstroke}{Stroke width of outlier points. Default is 1.}
 
 \item{dotshape}{Shape of outlier points. Default is 1.}
+
+\item{width}{Width of the boxplots (value between 0 and 1).}
 
 \item{linewidth}{Width of the boxplot outlines. Default is 0.5.}
 }
