@@ -21,6 +21,7 @@ globalVariables(c(".data"))
 #'   \item{q1}{The first quartile (25th percentile) of the vector.}
 #'   \item{q3}{The third quartile (75th percentile) of the vector.}
 #'   \item{iqr}{The interquartile range, calculated as \code{q3 - q1}.}
+#'   \item{n}{The total number of observations.}
 #'   \item{outlier_low_threshold}{The lower threshold for outliers, calculated as \code{q1 - 1.5 * iqr}.}
 #'   \item{outlier_high_threshold}{The upper threshold for outliers, calculated as \code{q3 + 1.5 * iqr}.}
 #'   \item{outliers}{A list-column of outlier values that are either below the lower threshold or above the upper threshold. Can also be a '|' delimited character vector of outliers}
@@ -47,6 +48,7 @@ calculate_boxplot_stats <- function(numeric_vector, id = NULL, return_dataframe 
   boxplot_stats$outlier_low_threshold <- boxplot_stats$q1 - 1.5 * boxplot_stats$iqr
   boxplot_stats$outlier_high_threshold <- boxplot_stats$q3 + 1.5 * boxplot_stats$iqr
   boxplot_stats$outliers <- numeric_vector[numeric_vector < boxplot_stats$outlier_low_threshold | numeric_vector > boxplot_stats$outlier_high_threshold]
+  boxplot_stats$n <- length(numeric_vector)
   boxplot_stats$id <- id
 
   # If return_dataframe is TRUE, convert the list to a dataframe
@@ -58,6 +60,7 @@ calculate_boxplot_stats <- function(numeric_vector, id = NULL, return_dataframe 
       q3 = boxplot_stats$q3,
       iqr = boxplot_stats$iqr,
       median = boxplot_stats$median,
+      n = boxplot_stats$n,
       outlier_low_threshold = boxplot_stats$outlier_low_threshold,
       outlier_high_threshold = boxplot_stats$outlier_high_threshold,
       outliers = I(list(boxplot_stats$outliers))

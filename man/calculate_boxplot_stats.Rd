@@ -33,6 +33,7 @@ A list or dataframe containing the following elements:
 \item{q1}{The first quartile (25th percentile) of the vector.}
 \item{q3}{The third quartile (75th percentile) of the vector.}
 \item{iqr}{The interquartile range, calculated as \code{q3 - q1}.}
+\item{n}{The total number of observations.}
 \item{outlier_low_threshold}{The lower threshold for outliers, calculated as \code{q1 - 1.5 * iqr}.}
 \item{outlier_high_threshold}{The upper threshold for outliers, calculated as \code{q3 + 1.5 * iqr}.}
 \item{outliers}{A list-column of outlier values that are either below the lower threshold or above the upper threshold. Can also be a '|' delimited character vector of outliers}
