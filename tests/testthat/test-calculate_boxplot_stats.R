@@ -25,6 +25,7 @@ expected_multiple_groups <- data.frame(
   q3 = c(8.5, 15),
   iqr = c(7, 7),
   median = c(5, 13),
+  n = c(15, 9),
   outlier_low_threshold = c(-9, -2.5),
   outlier_high_threshold = c(19, 25.5),
   outliers = I(list(c(22, 23), c(30, 31))),
@@ -41,6 +42,7 @@ test_that("calculate_boxplot_stats works correctly", {
   expect_equal(result$q1, 3.5, ignore_attr = TRUE)
   expect_equal(result$q3, 8.5, ignore_attr = TRUE)
   expect_equal(result$iqr, 5, ignore_attr = TRUE)
+  expect_equal(result$n, 11, ignore_attr = TRUE)
   expect_equal(result$outlier_low_threshold, -4, ignore_attr = TRUE)
   expect_equal(result$outlier_high_threshold, 16, ignore_attr = TRUE)
   expect_equal(unlist(result$outliers), 100, ignore_attr = TRUE)
@@ -56,6 +58,7 @@ test_that("calculate_boxplot_stats returns dataframe when specified", {
   expect_equal(result_df$q1, 3.5, ignore_attr = TRUE)
   expect_equal(result_df$q3, 8.5, ignore_attr = TRUE)
   expect_equal(result_df$iqr, 5, ignore_attr = TRUE)
+  expect_equal(result_df$n, 11, ignore_attr = TRUE)
   expect_equal(result_df$outlier_low_threshold, -4, ignore_attr = TRUE)
   expect_equal(result_df$outlier_high_threshold, 16, ignore_attr = TRUE)
   expect_equal(unlist(result_df$outliers), 100, ignore_attr = TRUE)
@@ -68,13 +71,14 @@ test_that("calculate_boxplot_stats_for_multiple_groups works correctly", {
   expect_s3_class(result, "data.frame")
 
   expect_equal(nrow(result), 2)
-  expect_equal(colnames(result), c("min", "max", "q1", "q3", "iqr", "median", "outlier_low_threshold", "outlier_high_threshold", "outliers", "id"))
+  expect_equal(colnames(result), c("min", "max", "q1", "q3", "iqr", "median", "n","outlier_low_threshold", "outlier_high_threshold", "outliers", "id"))
   expect_equal(result$min, expected_multiple_groups$min)
   expect_equal(result$max, expected_multiple_groups$max)
   expect_equal(result$median, expected_multiple_groups$median)
   expect_equal(result$q1, expected_multiple_groups$q1)
   expect_equal(result$q3, expected_multiple_groups$q3)
   expect_equal(result$iqr, expected_multiple_groups$iqr)
+  expect_equal(result$n, expected_multiple_groups$n)
   expect_equal(result$outlier_low_threshold, expected_multiple_groups$outlier_low_threshold)
   expect_equal(result$outlier_high_threshold, expected_multiple_groups$outlier_high_threshold)
   expect_equal(result$outliers, expected_multiple_groups$outliers)
